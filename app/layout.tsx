@@ -16,20 +16,20 @@ const playfair = Playfair_Display({
 })
 
 export const metadata: Metadata = {
-  title: 'Dra. Sofia Mendes | Odontologia Estética Premium',
-  description: 'Clínica odontológica de alto padrão especializada em lentes de contato dental, implantes, Invisalign e harmonização facial. Tecnologia de ponta e atendimento humanizado.',
-  keywords: ['dentista', 'odontologia estética', 'lentes de contato dental', 'implantes', 'Invisalign', 'harmonização facial', 'clareamento dental'],
-  authors: [{ name: 'Dra. Sofia Mendes' }],
+  title: 'Dra. Giovana Gomes | Educação, Palestras e Orientação em Saúde Bucal',
+  description: 'Palestras, consultorias e orientações online em saúde bucal preventiva para famílias, empresas, escolas e eventos.',
+  keywords: ['saúde bucal preventiva', 'educação em saúde bucal', 'palestras de saúde bucal', 'orientação online', 'consultoria preventiva', 'ações educativas'],
+  authors: [{ name: 'Dra. Giovana Gomes' }],
   openGraph: {
-    title: 'Dra. Sofia Mendes | Odontologia Estética Premium',
-    description: 'Transforme seu sorriso com tecnologia de ponta e atendimento humanizado.',
+    title: 'Dra. Giovana Gomes | Educação, Palestras e Orientação em Saúde Bucal',
+    description: 'Informação clara, prevenção e orientação profissional para famílias, empresas, escolas e eventos.',
     type: 'website',
     locale: 'pt_BR',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Dra. Sofia Mendes | Odontologia Estética Premium',
-    description: 'Transforme seu sorriso com tecnologia de ponta e atendimento humanizado.',
+    title: 'Dra. Giovana Gomes | Educação, Palestras e Orientação em Saúde Bucal',
+    description: 'Palestras, consultorias e orientações online com foco educativo, preventivo e responsável.',
   },
   robots: {
     index: true,

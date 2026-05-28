@@ -1,143 +1,187 @@
 "use client"
 
-import { motion } from "framer-motion"
-import { useInView } from "framer-motion"
-import { useRef } from "react"
-import { GraduationCap, Users, Award, Building2 } from "lucide-react"
+import { motion, useInView, useReducedMotion } from "framer-motion"
+import { Award, BookOpenCheck, HeartHandshake, Laptop, Presentation, ShieldCheck } from "lucide-react"
+import { useEffect, useRef, useState } from "react"
 
-const stats = [
-  {
-    icon: GraduationCap,
-    value: "15+",
-    label: "Anos de Experiência",
-    description: "Especialização em estética dental"
-  },
-  {
-    icon: Users,
-    value: "5.000+",
-    label: "Pacientes Atendidos",
-    description: "Sorrisos transformados"
-  },
+const authorityItems = [
   {
     icon: Award,
-    value: "12",
-    label: "Certificações",
-    description: "Nacionais e internacionais"
+    value: "CD",
+    label: "Cirurgiã-dentista",
+    description: "Atuação profissional com comunicação clara e responsável.",
   },
   {
-    icon: Building2,
-    value: "3",
-    label: "Unidades",
-    description: "São Paulo e região"
-  }
+    icon: ShieldCheck,
+    value: 3,
+    suffix: "",
+    label: "Frentes de cuidado",
+    description: "Educação, prevenção e orientação em saúde bucal.",
+  },
+  {
+    icon: Presentation,
+    value: 4,
+    suffix: "",
+    label: "Formatos educativos",
+    description: "Online, palestras, consultorias e materiais personalizados.",
+  },
+  {
+    icon: Laptop,
+    value: "1:1",
+    label: "Orientação online",
+    description: "Escuta individual e direcionamento preventivo quando fizer sentido.",
+  },
 ]
 
-const certifications = [
-  "USP - Especialização em Odontologia Estética",
-  "NYU - Advanced Aesthetic Dentistry",
-  "Invisalign - Diamond Provider",
-  "ABOE - Membro Titular"
+const principles = [
+  "Informação clara para decisões mais seguras sobre saúde bucal.",
+  "Prevenção também é cuidado.",
+  "Orientação profissional para transformar hábitos antes que problemas apareçam.",
+  "Conteúdos pensados para pessoas, famílias, equipes e organizações.",
 ]
+
+function AnimatedValue({
+  value,
+  suffix = "",
+  active,
+}: {
+  value: number | string
+  suffix?: string
+  active: boolean
+}) {
+  const [displayValue, setDisplayValue] = useState(0)
+  const shouldReduceMotion = useReducedMotion()
+
+  useEffect(() => {
+    if (typeof value !== "number" || !active || shouldReduceMotion) {
+      return
+    }
+
+    let frame = 0
+    const totalFrames = 36
+    const animate = () => {
+      frame += 1
+      const progress = Math.min(frame / totalFrames, 1)
+      const eased = 1 - Math.pow(1 - progress, 3)
+      setDisplayValue(Math.round(value * eased))
+
+      if (progress < 1) {
+        requestAnimationFrame(animate)
+      }
+    }
+
+    const id = requestAnimationFrame(animate)
+    return () => cancelAnimationFrame(id)
+  }, [active, shouldReduceMotion, value])
+
+  if (typeof value !== "number" || shouldReduceMotion) {
+    return (
+      <>
+        {value}
+        {suffix}
+      </>
+    )
+  }
+
+  return (
+    <>
+      {displayValue}
+      {suffix}
+    </>
+  )
+}
 
 export function AuthoritySection() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: "-100px" })
 
   return (
-    <section id="sobre" ref={ref} className="py-24 lg:py-32 relative overflow-hidden">
-      {/* Background */}
-      <div className="absolute inset-0 bg-secondary/50" />
-      
+    <section id="sobre" ref={ref} className="relative overflow-hidden py-24 lg:py-32">
+      <div className="absolute inset-0 bg-gradient-to-b from-background via-rose-soft/30 to-secondary/45" />
+
       <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8">
-        {/* Section Header */}
-        <div className="max-w-3xl mx-auto text-center mb-16">
+        <div className="mx-auto mb-14 max-w-3xl text-center">
           <motion.span
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 18 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5 }}
-            className="text-sm font-medium text-accent uppercase tracking-wider"
+            className="text-sm font-medium uppercase tracking-[0.22em] text-accent"
           >
-            Excelência Comprovada
+            Autoridade com acolhimento
           </motion.span>
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="mt-4 text-3xl sm:text-4xl lg:text-5xl font-serif font-medium tracking-tight text-balance"
+            transition={{ duration: 0.5, delay: 0.08 }}
+            className="mt-4 text-3xl font-serif font-medium tracking-tight text-balance sm:text-4xl lg:text-5xl"
           >
-            Tecnologia e expertise para{" "}
-            <span className="text-gradient-gold italic">resultados excepcionais</span>
+            Educação em saúde bucal para{" "}
+            <span className="text-gradient-gold italic">rotinas mais conscientes</span>
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="mt-6 text-lg text-muted-foreground leading-relaxed"
+            transition={{ duration: 0.5, delay: 0.16 }}
+            className="mt-6 text-lg leading-relaxed text-muted-foreground"
           >
-            Combinamos as mais avançadas técnicas da odontologia moderna com um atendimento 
-            humanizado e personalizado para cada paciente.
+            Giovana Gomes atua levando informação de qualidade sobre saúde bucal de forma leve, acessível e preventiva, ajudando pessoas, famílias e empresas a criarem hábitos mais saudáveis e seguros.
           </motion.p>
         </div>
 
-        {/* Stats Grid */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 mb-16">
-          {stats.map((stat, index) => (
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {authorityItems.map((item, index) => (
             <motion.div
-              key={stat.label}
-              initial={{ opacity: 0, y: 30 }}
+              key={item.label}
+              initial={{ opacity: 0, y: 28 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: 0.1 * index }}
+              transition={{ duration: 0.5, delay: 0.08 * index }}
               className="group"
             >
-              <div className="bg-card rounded-2xl p-6 lg:p-8 border border-border hover:border-accent/30 transition-all duration-300 h-full">
-                <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center mb-4 group-hover:bg-accent/20 transition-colors">
-                  <stat.icon className="h-6 w-6 text-accent" />
+              <div className="premium-card h-full rounded-lg p-6 transition-all duration-300 hover:-translate-y-1 hover:border-accent/40 hover:shadow-xl hover:shadow-charcoal/10">
+                <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-lg bg-rose-soft text-accent transition-colors group-hover:bg-champagne/70">
+                  <item.icon className="h-6 w-6" />
                 </div>
-                <div className="text-3xl lg:text-4xl font-semibold text-foreground mb-1">
-                  {stat.value}
+                <div className="text-3xl font-semibold tracking-tight text-foreground">
+                  <AnimatedValue value={item.value} suffix={item.suffix} active={isInView} />
                 </div>
-                <div className="font-medium text-foreground mb-1">
-                  {stat.label}
-                </div>
-                <div className="text-sm text-muted-foreground">
-                  {stat.description}
-                </div>
+                <p className="mt-2 font-medium text-foreground">{item.label}</p>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.description}</p>
               </div>
             </motion.div>
           ))}
         </div>
 
-        {/* Certifications */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 28 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5, delay: 0.5 }}
-          className="bg-card rounded-2xl p-8 lg:p-12 border border-border"
+          transition={{ duration: 0.55, delay: 0.36 }}
+          className="mt-10 grid gap-8 rounded-lg border border-accent/20 bg-card/80 p-6 shadow-xl shadow-charcoal/5 backdrop-blur lg:grid-cols-[0.92fr_1.08fr] lg:p-10"
         >
-          <div className="grid lg:grid-cols-2 gap-8 items-center">
-            <div>
-              <h3 className="text-2xl font-serif font-medium mb-4">
-                Formação e Certificações
-              </h3>
-              <p className="text-muted-foreground leading-relaxed">
-                A busca constante por atualização e as mais renomadas certificações 
-                garantem que você receba o tratamento mais avançado disponível.
-              </p>
+          <div>
+            <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-lg bg-sage/15 text-sage">
+              <HeartHandshake className="h-7 w-7" />
             </div>
-            <div className="grid sm:grid-cols-2 gap-4">
-              {certifications.map((cert, index) => (
-                <motion.div
-                  key={cert}
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={isInView ? { opacity: 1, x: 0 } : {}}
-                  transition={{ duration: 0.4, delay: 0.6 + index * 0.1 }}
-                  className="flex items-center gap-3 p-3 rounded-lg bg-secondary/50"
-                >
-                  <div className="w-2 h-2 rounded-full bg-accent flex-shrink-0" />
-                  <span className="text-sm font-medium text-foreground">{cert}</span>
-                </motion.div>
-              ))}
-            </div>
+            <h3 className="text-2xl font-serif font-medium text-foreground">
+              Um espaço educativo para cuidar com mais clareza
+            </h3>
+            <p className="mt-4 leading-relaxed text-muted-foreground">
+              A proposta é aproximar conhecimento profissional da vida real: dúvidas de rotina, prevenção, escolhas mais seguras e orientação ética sobre quando procurar uma avaliação presencial.
+            </p>
+          </div>
+
+          <div className="grid gap-3 sm:grid-cols-2">
+            {principles.map((principle, index) => (
+              <motion.div
+                key={principle}
+                initial={{ opacity: 0, x: 18 }}
+                animate={isInView ? { opacity: 1, x: 0 } : {}}
+                transition={{ duration: 0.45, delay: 0.42 + index * 0.06 }}
+                className="flex gap-3 rounded-lg bg-secondary/50 p-4"
+              >
+                <BookOpenCheck className="mt-0.5 h-5 w-5 shrink-0 text-accent" />
+                <p className="text-sm leading-relaxed text-muted-foreground">{principle}</p>
+              </motion.div>
+            ))}
           </div>
         </motion.div>
       </div>

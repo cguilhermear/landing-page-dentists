@@ -1,49 +1,49 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { MapPin, Phone, Mail, Clock, Instagram, Facebook, Linkedin } from "lucide-react"
+import { Instagram, Linkedin, Mail, MessageCircle, Presentation, ShieldCheck, Video } from "lucide-react"
+
+const whatsappUrl =
+  "https://wa.me/5511999999999?text=Ol%C3%A1%2C%20Dra.%20Giovana.%20Gostaria%20de%20solicitar%20uma%20orienta%C3%A7%C3%A3o%20em%20sa%C3%BAde%20bucal."
 
 const contactInfo = [
   {
-    icon: MapPin,
-    label: "Endereço",
-    value: "Av. Paulista, 1000 - Conjunto 1501",
-    detail: "Bela Vista, São Paulo - SP"
-  },
-  {
-    icon: Phone,
-    label: "Telefone",
-    value: "(11) 99999-9999",
-    detail: "(11) 3333-3333"
+    icon: MessageCircle,
+    label: "WhatsApp",
+    value: "Solicitar orientação",
+    href: whatsappUrl,
   },
   {
     icon: Mail,
     label: "E-mail",
-    value: "contato@drasofiamendes.com.br",
-    detail: null
+    value: "contato@dragiovanagomes.com.br",
+    href: "mailto:contato@dragiovanagomes.com.br",
   },
   {
-    icon: Clock,
-    label: "Horário",
-    value: "Seg a Sex: 8h às 19h",
-    detail: "Sábados: 8h às 13h"
-  }
+    icon: Presentation,
+    label: "Palestras e consultorias",
+    value: "Empresas, escolas e eventos",
+    href: "#palestras",
+  },
+  {
+    icon: Video,
+    label: "Orientação online",
+    value: "Foco educativo e preventivo",
+    href: "#orientacao-online",
+  },
 ]
 
 const socialLinks = [
   { icon: Instagram, href: "https://instagram.com", label: "Instagram" },
-  { icon: Facebook, href: "https://facebook.com", label: "Facebook" },
-  { icon: Linkedin, href: "https://linkedin.com", label: "LinkedIn" }
+  { icon: Linkedin, href: "https://linkedin.com", label: "LinkedIn" },
 ]
 
 export function Footer() {
   return (
     <footer id="contato" className="relative overflow-hidden">
-      {/* Main Footer */}
       <div className="bg-secondary/50 py-16 lg:py-20">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16">
-            {/* Brand & Info */}
+          <div className="grid gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:gap-16">
             <div>
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -52,24 +52,19 @@ export function Footer() {
                 transition={{ duration: 0.5 }}
               >
                 <span className="text-2xl font-semibold tracking-tight text-foreground">
-                  Dra. Sofia <span className="text-gradient-gold font-serif italic">Mendes</span>
+                  Dra. Giovana <span className="text-gradient-gold font-serif italic">Gomes</span>
                 </span>
-                <p className="mt-4 text-muted-foreground max-w-md leading-relaxed">
-                  Odontologia estética de alto padrão. Transformando sorrisos 
-                  e vidas há mais de 15 anos com tecnologia, precisão e arte.
-                </p>
-                <p className="mt-4 text-sm text-muted-foreground">
-                  CRO-SP 123456 | Responsável Técnica
+                <p className="mt-4 max-w-md leading-relaxed text-muted-foreground">
+                  Educação, palestras, consultorias e orientação online em saúde bucal preventiva para pessoas, famílias, empresas, escolas e eventos.
                 </p>
               </motion.div>
 
-              {/* Social Links */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.1 }}
-                className="mt-8 flex gap-4"
+                className="mt-8 flex gap-3"
               >
                 {socialLinks.map((social) => (
                   <a
@@ -77,7 +72,7 @@ export function Footer() {
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-10 h-10 rounded-full bg-card border border-border flex items-center justify-center hover:border-accent/50 hover:bg-accent/10 transition-all duration-300"
+                    className="flex h-10 w-10 items-center justify-center rounded-full border border-border bg-card transition-all duration-300 hover:border-accent/50 hover:bg-rose-soft"
                     aria-label={social.label}
                   >
                     <social.icon className="h-5 w-5 text-muted-foreground" />
@@ -86,19 +81,21 @@ export function Footer() {
               </motion.div>
             </div>
 
-            {/* Contact Info */}
-            <div className="grid sm:grid-cols-2 gap-6">
+            <div className="grid gap-5 sm:grid-cols-2">
               {contactInfo.map((info, index) => (
-                <motion.div
+                <motion.a
                   key={info.label}
+                  href={info.href}
+                  target={info.href.startsWith("http") ? "_blank" : undefined}
+                  rel={info.href.startsWith("http") ? "noopener noreferrer" : undefined}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: 0.1 * index }}
-                  className="flex gap-4"
+                  transition={{ duration: 0.5, delay: 0.08 * index }}
+                  className="group premium-card flex gap-4 rounded-lg p-5 transition-all duration-300 hover:-translate-y-1 hover:border-accent/40 hover:shadow-xl hover:shadow-charcoal/10"
                 >
-                  <div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center flex-shrink-0">
-                    <info.icon className="h-5 w-5 text-accent" />
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-rose-soft text-accent transition-colors group-hover:bg-champagne/70">
+                    <info.icon className="h-5 w-5" />
                   </div>
                   <div>
                     <p className="text-sm font-medium text-muted-foreground">
@@ -107,52 +104,41 @@ export function Footer() {
                     <p className="font-medium text-foreground">
                       {info.value}
                     </p>
-                    {info.detail && (
-                      <p className="text-sm text-muted-foreground">
-                        {info.detail}
-                      </p>
-                    )}
                   </div>
-                </motion.div>
+                </motion.a>
               ))}
             </div>
           </div>
 
-          {/* Map Placeholder */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-            className="mt-12 rounded-2xl overflow-hidden border border-border bg-card"
+            transition={{ duration: 0.5, delay: 0.25 }}
+            className="mt-12 rounded-lg border border-sage/20 bg-health-blue-soft/35 p-5"
           >
-            <div className="aspect-[21/9] lg:aspect-[21/6] bg-gradient-to-br from-secondary to-muted flex items-center justify-center">
-              <div className="text-center">
-                <MapPin className="h-8 w-8 text-accent mx-auto mb-2" />
-                <p className="text-sm text-muted-foreground">
-                  Clique para abrir no Google Maps
-                </p>
-              </div>
+            <div className="flex gap-3">
+              <ShieldCheck className="mt-0.5 h-5 w-5 shrink-0 text-sage" />
+              <p className="text-sm leading-relaxed text-muted-foreground">
+                As orientações online têm caráter educativo e preventivo. Quando necessário, a avaliação presencial com um profissional será recomendada.
+              </p>
             </div>
           </motion.div>
         </div>
       </div>
 
-      {/* Bottom Bar */}
-      <div className="bg-card border-t border-border py-6">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-            <p className="text-sm text-muted-foreground text-center sm:text-left">
-              © {new Date().getFullYear()} Dra. Sofia Mendes. Todos os direitos reservados.
-            </p>
-            <div className="flex items-center gap-6">
-              <a href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-                Política de Privacidade
-              </a>
-              <a href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-                Termos de Uso
-              </a>
-            </div>
+      <div className="border-t border-border bg-card py-6">
+        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-6 sm:flex-row lg:px-8">
+          <p className="text-center text-sm text-muted-foreground sm:text-left">
+            © {new Date().getFullYear()} Dra. Giovana Gomes. Todos os direitos reservados.
+          </p>
+          <div className="flex items-center gap-6">
+            <a href="#" className="text-sm text-muted-foreground transition-colors hover:text-foreground">
+              Política de Privacidade
+            </a>
+            <a href="#" className="text-sm text-muted-foreground transition-colors hover:text-foreground">
+              Termos de Uso
+            </a>
           </div>
         </div>
       </div>

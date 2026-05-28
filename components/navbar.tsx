@@ -2,17 +2,21 @@
 
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { Menu, X, Phone } from "lucide-react"
+import { Menu, X, MessageCircle } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 const navLinks = [
+  { href: "#inicio", label: "Início" },
   { href: "#sobre", label: "Sobre" },
-  { href: "#procedimentos", label: "Procedimentos" },
-  { href: "#resultados", label: "Resultados" },
-  { href: "#clinica", label: "A Clínica" },
-  { href: "#depoimentos", label: "Depoimentos" },
+  { href: "#como-posso-ajudar", label: "Como posso ajudar" },
+  { href: "#palestras", label: "Palestras" },
+  { href: "#orientacao-online", label: "Orientação online" },
+  { href: "#duvidas", label: "Dúvidas" },
   { href: "#contato", label: "Contato" },
 ]
+
+const whatsappUrl =
+  "https://wa.me/5511999999999?text=Ol%C3%A1%2C%20Dra.%20Giovana.%20Gostaria%20de%20solicitar%20uma%20orienta%C3%A7%C3%A3o%20em%20sa%C3%BAde%20bucal."
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false)
@@ -34,7 +38,7 @@ export function Navbar() {
         transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           isScrolled
-            ? "glass py-3"
+            ? "glass py-3 shadow-sm shadow-charcoal/5"
             : "bg-transparent py-5"
         }`}
       >
@@ -42,13 +46,13 @@ export function Navbar() {
           <nav className="flex items-center justify-between">
             {/* Logo */}
             <motion.a 
-              href="#"
+              href="#inicio"
               className="flex items-center gap-2"
               whileHover={{ scale: 1.02 }}
               transition={{ duration: 0.2 }}
             >
               <span className="text-xl font-semibold tracking-tight text-foreground">
-                Dra. Sofia <span className="text-gradient-gold font-serif italic">Mendes</span>
+                Dra. Giovana <span className="text-gradient-gold font-serif italic">Gomes</span>
               </span>
             </motion.a>
 
@@ -71,23 +75,13 @@ export function Navbar() {
             {/* CTA Buttons */}
             <div className="hidden lg:flex items-center gap-3">
               <Button
-                variant="ghost"
                 size="sm"
-                className="text-muted-foreground hover:text-foreground"
+                className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-full px-5 shadow-sm"
                 asChild
               >
-                <a href="tel:+5511999999999">
-                  <Phone className="mr-2 h-4 w-4" />
-                  (11) 99999-9999
-                </a>
-              </Button>
-              <Button
-                size="sm"
-                className="bg-foreground text-background hover:bg-foreground/90 rounded-full px-5"
-                asChild
-              >
-                <a href="https://wa.me/5511999999999" target="_blank" rel="noopener noreferrer">
-                  Agendar Avaliação
+                <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">
+                  <MessageCircle className="mr-2 h-4 w-4" />
+                  Solicitar orientação
                 </a>
               </Button>
             </div>
@@ -152,21 +146,12 @@ export function Navbar() {
 
                 <div className="mt-auto flex flex-col gap-3">
                   <Button
-                    variant="outline"
-                    className="w-full justify-center"
+                    className="w-full bg-primary text-primary-foreground hover:bg-primary/90 rounded-full"
                     asChild
                   >
-                    <a href="tel:+5511999999999">
-                      <Phone className="mr-2 h-4 w-4" />
-                      (11) 99999-9999
-                    </a>
-                  </Button>
-                  <Button
-                    className="w-full bg-foreground text-background hover:bg-foreground/90"
-                    asChild
-                  >
-                    <a href="https://wa.me/5511999999999" target="_blank" rel="noopener noreferrer">
-                      Agendar Avaliação
+                    <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">
+                      <MessageCircle className="mr-2 h-4 w-4" />
+                      Solicitar orientação
                     </a>
                   </Button>
                 </div>
