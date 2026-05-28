@@ -31,10 +31,10 @@ export function WhatsAppButton() {
           whileHover={{ y: -3 }}
           whileTap={{ scale: 0.98 }}
           className="fixed bottom-5 right-5 z-50 inline-flex items-center gap-2 rounded-full border border-white/60 bg-primary px-4 py-3 text-sm font-medium text-primary-foreground shadow-2xl shadow-charcoal/18 transition-colors hover:bg-primary/90 sm:bottom-6 sm:right-6 sm:px-5"
-          aria-label="Falar com a Giovana pelo WhatsApp"
+          aria-label="Falar com a Dra. Giovana pelo WhatsApp"
         >
           <MessageCircle className="h-5 w-5" />
-          <span className="hidden sm:inline">Falar com a Giovana</span>
+          <span className="hidden sm:inline">Falar com a Dra. Giovana</span>
           <span className="sm:hidden">Orientação</span>
         </motion.a>
       )}

@@ -124,7 +124,7 @@ export function AuthoritySection() {
             transition={{ duration: 0.5, delay: 0.16 }}
             className="mt-6 text-lg leading-relaxed text-muted-foreground"
           >
-            Giovana Gomes atua levando informação de qualidade sobre saúde bucal de forma leve, acessível e preventiva, ajudando pessoas, famílias e empresas a criarem hábitos mais saudáveis e seguros.
+            A Dra. Giovana Gomes atua levando informação de qualidade sobre saúde bucal de forma leve, acessível e preventiva, ajudando pessoas, famílias e empresas a criarem hábitos mais saudáveis e seguros.
           </motion.p>
         </div>
 
